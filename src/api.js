@@ -1,9 +1,8 @@
 const axios = require('axios');
 
-const { APIURL } = require('../urls');
+const createAPI = (urls) =>
+	axios.create({
+		baseURL: urls.APIURL,
+	});
 
-const instance = axios.create({
-	baseURL: APIURL,
-});
-
-module.exports = instance;
+module.exports = { createAPI };
