@@ -1,14 +1,16 @@
 const io = require('socket.io-client');
 
-const createConnection = (data, urls) =>
+const createConnection = ({ params, urls }) =>
 	new Promise((resolve, reject) => {
-		if (!data || !urls) return reject('Invalid params.');
+		if (!params || !urls) return reject('Invalid params.');
 
 		let socket = io(urls.PluginsURL, {
 			extraHeaders: {
-				APIKey: data.key,
+				APIKey: params.key,
 			},
 		});
+
+		socket.emit('setup', { name: params.name });
 
 		resolve(socket);
 	});
