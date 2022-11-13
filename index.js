@@ -3,14 +3,22 @@ const fetchURLs = require('./src/urls');
 const API = require('./src/api');
 const connections = require('./src/connections');
 
-function SDK(params) {
-	const urls = fetchURLs(params.dev);
+class SDK {
+	constructor(params) {
+		this.params = params;
+		this.urls = fetchURLs(params.dev);
+	}
 
-	this.connection = connections.createConnection(params, urls);
+	createConnection() {
+		const connection = connections.createConnection(this.params, this.urls);
 
-	this.API = API.createAPI(params, urls);
+		return connection;
+	}
+	async createAPI() {
+		const instance = await API.createAPI(this.urls);
 
-	return this;
+		return instance;
+	}
 }
 
 module.exports = SDK;
