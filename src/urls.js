@@ -6,6 +6,8 @@ function urls(dev) {
 	this.APIURL = dev
 		? 'http://localhost:3001/internal'
 		: 'https://api.adrencad.com/url';
+
+	return this;
 }
 
 module.exports = urls;

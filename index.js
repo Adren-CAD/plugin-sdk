@@ -9,6 +9,8 @@ function SDK(params) {
 	this.connection = connections.createConnection(params, urls);
 
 	this.API = API.createAPI(params, urls);
+
+	return this;
 }
 
 module.exports = SDK;
